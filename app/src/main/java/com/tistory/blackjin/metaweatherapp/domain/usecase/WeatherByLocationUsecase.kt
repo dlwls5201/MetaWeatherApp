@@ -39,7 +39,6 @@ class WeatherByLocationUsecase(
         }
         .subscribeOn(schedulersProvider.io())
 
-    //
     private fun get(location: Location): Disposable {
         return locationRepository.getInfo(location.woeid)
             .map {
