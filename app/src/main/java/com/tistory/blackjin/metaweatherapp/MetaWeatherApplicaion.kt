@@ -1,6 +1,7 @@
 package com.tistory.blackjin.metaweatherapp
 
 import android.app.Application
+import com.tistory.blackjin.metaweatherapp.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.logger.AndroidLogger
 import org.koin.core.context.startKoin
@@ -36,7 +37,11 @@ class MetaWeatherApplicaion : Application() {
 
             modules(
                 listOf(
-
+                    appModule,
+                    networkModule,
+                    repoModule,
+                    usecaseModule,
+                    viewModelModule
                 )
             )
         }
