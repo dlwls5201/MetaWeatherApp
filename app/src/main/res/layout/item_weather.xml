@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="localWeatherItem"
             type="com.tistory.blackjin.metaweatherapp.presenter.model.LocalWeatherItem" />

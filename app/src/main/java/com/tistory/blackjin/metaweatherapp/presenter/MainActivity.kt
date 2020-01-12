@@ -11,9 +11,7 @@ import com.tistory.blackjin.metaweatherapp.base.BaseActivity
 import com.tistory.blackjin.metaweatherapp.databinding.ActivityMainBinding
 import com.tistory.blackjin.metaweatherapp.presenter.adapter.WeatherAdapter
 import com.tistory.blackjin.metaweatherapp.presenter.viewmodel.WeatherViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
     SwipeRefreshLayout.OnRefreshListener {
@@ -25,42 +23,51 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Timber.d("weatherViewModel items : ${weatherViewModel.items.value}")
-        if (weatherViewModel.items.value == null) {
-            weatherViewModel.loadWeathers("se")
-        }
+        binding.weatherModel = weatherViewModel
 
-        weatherViewModel.items.observe(this, Observer {
-            Timber.d("items : $it")
-            weatherAdapter.replaceAll(it)
-            hideSwipeRefreshLoading()
-        })
-
+        initObserve()
         setupRecyclerView()
         setupSwipeRefresh()
-
+        loadWeather()
     }
 
-    override fun onRefresh() {
-        weatherViewModel.loadWeathers("se")
+    private fun initObserve() {
+        weatherViewModel.items.observe(this, Observer {
+            weatherAdapter.replaceAll(it)
+            if (binding.srlMainWeather.isRefreshing) {
+                hideSwipeRefreshLoading()
+            }
+        })
     }
 
     private fun setupRecyclerView() {
-        with(rvMainWeather) {
+        with(binding.rvMainWeather) {
             adapter = weatherAdapter
 
-            val context = this.context
-            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL).apply {
-                setDrawable(ContextCompat.getDrawable(context, R.drawable.line_weather_divider)!!)
+            addItemDecoration(DividerItemDecoration(this.context, LinearLayout.VERTICAL).apply {
+                ContextCompat.getDrawable(context, R.drawable.line_weather_divider)?.let {
+                    setDrawable(it)
+                }
             })
         }
     }
 
     private fun setupSwipeRefresh() {
-        srlMainWeather.setOnRefreshListener(this)
+        binding.srlMainWeather.setOnRefreshListener(this)
+    }
+
+    override fun onRefresh() {
+        weatherAdapter.clear()
+        weatherViewModel.loadWeathers("se")
     }
 
     private fun hideSwipeRefreshLoading() {
-        srlMainWeather.isRefreshing = false
+        binding.srlMainWeather.isRefreshing = false
+    }
+
+    private fun loadWeather() {
+        if (weatherViewModel.items.value == null) {
+            weatherViewModel.loadWeathers("se")
+        }
     }
 }

@@ -63,8 +63,12 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
+            <FrameLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/item_weather_divider_line" />
 
+        </LinearLayout>
 
     </RelativeLayout>
 </layout>

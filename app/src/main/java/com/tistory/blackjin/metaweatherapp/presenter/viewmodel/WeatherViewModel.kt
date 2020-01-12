@@ -20,10 +20,11 @@ class WeatherViewModel(
     init {
         usecase.weathersSubject.subscribe({
             if (usecase.isComplete()) {
-                Timber.d("$it")
+                hideLoading()
                 _items.postValue(it.values.toList())
             }
         }) {
+            hideLoading()
             Timber.e("$it")
         }.also {
             compositeDisposable.add(it)
@@ -37,9 +38,14 @@ class WeatherViewModel(
                     compositeDisposable.addAll(disposable)
                 }
             }) {
+                hideLoading()
                 Timber.e(it)
             }.also {
                 compositeDisposable.add(it)
             }
+    }
+
+    private fun hideLoading() {
+        _isLoading.postValue(false)
     }
 }

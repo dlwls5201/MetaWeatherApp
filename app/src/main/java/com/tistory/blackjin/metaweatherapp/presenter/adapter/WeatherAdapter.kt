@@ -20,6 +20,11 @@ class WeatherAdapter : RecyclerView.Adapter<BaseViewHolder<LocalWeatherItem>>() 
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        this.items.clear()
+        notifyDataSetChanged()
+    }
+
     override fun getItemViewType(position: Int) = getViewType(position).ordinal
 
     private fun getViewType(position: Int): ViewType {
