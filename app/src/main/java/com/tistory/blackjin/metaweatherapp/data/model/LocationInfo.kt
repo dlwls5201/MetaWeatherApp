@@ -31,6 +31,6 @@ fun LocationInfo.ConsolidatedWeather.mapToPresentation() =
     LocalWeatherItem.WeatherItem(
         weatherSummary = weatherStateName,
         weatherImg = weatherStateAbbr,
-        weatherNow = theTemp.toString(),
+        weatherTemp = theTemp.toString(),
         humidity = humidity.toString()
     )

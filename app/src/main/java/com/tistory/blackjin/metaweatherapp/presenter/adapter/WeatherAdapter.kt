@@ -73,10 +73,7 @@ class WeatherAdapter : RecyclerView.Adapter<BaseViewHolder<LocalWeatherItem>>() 
         override fun bind(item: LocalWeatherItem) {
             try {
                 binding.run {
-                    /*variableId?.let {
-                        setVariable(it, item)
-                    }*/
-                    binding.tvItemWeatherSummary.text = item.local
+                    binding.localWeatherItem = item
                     executePendingBindings()
                 }
                 itemView.visibility = View.VISIBLE

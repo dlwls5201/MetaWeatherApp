@@ -1,22 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="localWeatherItem"
+            type="com.tistory.blackjin.metaweatherapp.presenter.model.LocalWeatherItem" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:orientation="vertical">
+        android:layout_height="@dimen/item_weather_height"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/item_weather_divider_line" />
 
         <TextView
-            android:id="@+id/tvItemWeatherSummary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            tools:text="Weather Summary" />
+            android:layout_width="@dimen/item_weather_local_width"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="@{localWeatherItem.local}"
+            android:textSize="15sp"
+            tools:text="Seoul" />
 
-    </RelativeLayout>
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/item_weather_divider_line" />
+
+        <include
+            layout="@layout/include_weather_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:weatherItem="@{localWeatherItem.today}" />
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/item_weather_divider_line" />
+
+        <include
+            layout="@layout/include_weather_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:weatherItem="@{localWeatherItem.tomorrow}" />
+
+        <FrameLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/item_weather_divider_line" />
+
+    </LinearLayout>
 </layout>

@@ -8,7 +8,7 @@ data class LocalWeatherItem(
     data class WeatherItem(
         val weatherSummary: String = "",
         val weatherImg: String = "",
-        val weatherNow: String = "",
+        val weatherTemp: String = "",
         val humidity: String = ""
     )
 }
