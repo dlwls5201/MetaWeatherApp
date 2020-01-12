@@ -2,7 +2,7 @@ package com.tistory.blackjin.metaweatherapp.util
 
 import com.tistory.blackjin.metaweatherapp.R
 
-object WeatheUtil {
+object WeatherUtil {
 
     fun getImage(weatherStateAbbr: String) = when (weatherStateAbbr) {
         "sn" -> R.drawable.ic_weather_snow
