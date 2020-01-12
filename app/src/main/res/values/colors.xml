@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#be3e3b</color>
     <color name="colorAccent">@android:color/black</color>
 
+    <color name="red">#ff0000</color>
+    <color name="blue">#0000ff</color>
+
     <color name="item_weather_header_background">#fbf9fb</color>
     <color name="item_weather_divider_line">#dbd9da</color>
 </resources>

@@ -2,6 +2,8 @@ package com.tistory.blackjin.metaweatherapp.data.model
 
 import com.google.gson.annotations.SerializedName
 import com.tistory.blackjin.metaweatherapp.presenter.model.LocalWeatherItem
+import com.tistory.blackjin.metaweatherapp.util.WeatheUtil
+import kotlin.math.roundToInt
 
 data class LocationInfo(
     @SerializedName("consolidated_weather")
@@ -30,7 +32,7 @@ data class LocationInfo(
 fun LocationInfo.ConsolidatedWeather.mapToPresentation() =
     LocalWeatherItem.WeatherItem(
         weatherSummary = weatherStateName,
-        weatherImg = weatherStateAbbr,
-        weatherTemp = theTemp.toString(),
+        weatherImg = WeatheUtil.getImage(weatherStateAbbr),
+        weatherTemp = theTemp.roundToInt(),
         humidity = humidity.toString()
     )
